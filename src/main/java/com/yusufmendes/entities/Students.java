@@ -1,5 +1,6 @@
 package com.yusufmendes.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class Students {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_of_date", nullable = true)
     private Date birthOfDate;
 
