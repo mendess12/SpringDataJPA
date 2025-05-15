@@ -13,4 +13,6 @@ public interface IStudentController {
     public Students getStudentById(Integer id);
 
     public void deleteStudentById(Integer id);
+
+    public Students updateStudent(Integer id, Students updatedStudent);
 }

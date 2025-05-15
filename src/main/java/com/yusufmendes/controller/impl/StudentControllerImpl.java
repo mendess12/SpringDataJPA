@@ -39,5 +39,10 @@ public class StudentControllerImpl implements IStudentController {
         studentService.deleteStudentById(id);
     }
 
+    @PutMapping(path = "/update/{id}")
+    @Override
+    public Students updateStudent(@PathVariable(name = "id") Integer id, @RequestBody Students updatedStudent) {
+        return studentService.updateStudent(id, updatedStudent);
+    }
 
 }
