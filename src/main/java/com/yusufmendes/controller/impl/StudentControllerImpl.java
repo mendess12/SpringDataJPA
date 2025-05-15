@@ -5,6 +5,7 @@ import com.yusufmendes.entities.Students;
 import com.yusufmendes.services.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -25,5 +26,12 @@ public class StudentControllerImpl implements IStudentController {
     public List<Students> getAllStudents() {
         return studentService.getAllStudents();
     }
+
+    @GetMapping(path = "/list/{id}")
+    @Override
+    public Students getStudentById(@PathVariable(name = "id") Integer id) {
+        return studentService.getStudentById(id);
+    }
+
 
 }
