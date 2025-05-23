@@ -8,6 +8,8 @@ import com.yusufmendes.services.IStudentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +33,15 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public List<Students> getAllStudents() {
-        return studentRepository.findAll();
+    public List<DtoStudents> getAllStudents() {
+        List<DtoStudents> dtoList = new ArrayList<>();
+        List<Students> studentList = studentRepository.findAll();
+        for (Students student : studentList) {
+            DtoStudents dtoStudents = new DtoStudents();
+            BeanUtils.copyProperties(student, dtoStudents);
+            dtoList.add(dtoStudents);
+        }
+        return dtoList;
     }
 
     @Override

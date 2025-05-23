@@ -24,7 +24,7 @@ public class StudentControllerImpl implements IStudentController {
 
     @GetMapping(path = "/list")
     @Override
-    public List<Students> getAllStudents() {
+    public List<DtoStudents> getAllStudents() {
         return studentService.getAllStudents();
     }
 
