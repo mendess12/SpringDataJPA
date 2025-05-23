@@ -45,10 +45,13 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public Students getStudentById(Integer id) {
-        Optional<Students> students = studentRepository.findById(id);
-        if (students.isPresent()) {
-            return students.get();
+    public DtoStudents getStudentById(Integer id) {
+        DtoStudents dto = new DtoStudents();
+        Optional<Students> optinal = studentRepository.findById(id);
+        if (optinal.isPresent()) {
+            Students dbStudent = optinal.get();
+            BeanUtils.copyProperties(dbStudent, dto);
+            return dto;
         }
         return null;
     }

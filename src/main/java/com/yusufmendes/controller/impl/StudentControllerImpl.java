@@ -30,7 +30,7 @@ public class StudentControllerImpl implements IStudentController {
 
     @GetMapping(path = "/list/{id}")
     @Override
-    public Students getStudentById(@PathVariable(name = "id") Integer id) {
+    public DtoStudents getStudentById(@PathVariable(name = "id") Integer id) {
         return studentService.getStudentById(id);
     }
 
