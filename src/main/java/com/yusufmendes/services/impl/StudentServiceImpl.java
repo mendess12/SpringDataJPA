@@ -58,9 +58,9 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public void deleteStudentById(Integer id) {
-        Students dbStudent = getStudentById(id);
-        if (dbStudent != null) {
-            studentRepository.delete(dbStudent);
+       Optional<Students> optional =studentRepository.findById(id);
+        if (optional.isPresent()) {
+            studentRepository.delete(optional.get());
         }
     }
 
