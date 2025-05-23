@@ -7,6 +7,7 @@ import com.yusufmendes.entities.Students;
 import com.yusufmendes.services.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -42,8 +43,8 @@ public class StudentControllerImpl implements IStudentController {
 
     @PutMapping(path = "/update/{id}")
     @Override
-    public Students updateStudent(@PathVariable(name = "id") Integer id, @RequestBody Students updatedStudent) {
-        return studentService.updateStudent(id, updatedStudent);
+    public DtoStudents updateStudent(@PathVariable(name = "id") Integer id, @RequestBody DtoStudentsIU dtoStudentsIU) {
+        return studentService.updateStudent(id, dtoStudentsIU);
     }
 
 }
