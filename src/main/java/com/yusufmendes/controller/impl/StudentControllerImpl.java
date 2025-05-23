@@ -1,11 +1,12 @@
 package com.yusufmendes.controller.impl;
 
 import com.yusufmendes.controller.IStudentController;
+import com.yusufmendes.dto.DtoStudents;
+import com.yusufmendes.dto.DtoStudentsIU;
 import com.yusufmendes.entities.Students;
 import com.yusufmendes.services.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,8 +18,8 @@ public class StudentControllerImpl implements IStudentController {
 
     @PostMapping(path = "/save")
     @Override
-    public Students saveStudent(@RequestBody Students students) {
-        return studentService.saveStudent(students);
+    public DtoStudents saveStudent(@RequestBody DtoStudentsIU dtoStudentIU) {
+        return studentService.saveStudent(dtoStudentIU);
     }
 
     @GetMapping(path = "/list")

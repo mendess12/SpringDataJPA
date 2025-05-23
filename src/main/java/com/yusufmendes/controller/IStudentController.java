@@ -1,12 +1,14 @@
 package com.yusufmendes.controller;
 
+import com.yusufmendes.dto.DtoStudents;
+import com.yusufmendes.dto.DtoStudentsIU;
 import com.yusufmendes.entities.Students;
 
 import java.util.List;
 
 public interface IStudentController {
 
-    public Students saveStudent(Students students);
+    public DtoStudents saveStudent(DtoStudentsIU dtoStudentIU);
 
     public List<Students> getAllStudents();
 

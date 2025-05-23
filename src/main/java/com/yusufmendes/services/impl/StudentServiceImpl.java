@@ -1,11 +1,13 @@
 package com.yusufmendes.services.impl;
 
+import com.yusufmendes.dto.DtoStudents;
+import com.yusufmendes.dto.DtoStudentsIU;
 import com.yusufmendes.entities.Students;
 import com.yusufmendes.repository.StudentRepository;
 import com.yusufmendes.services.IStudentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +18,16 @@ public class StudentServiceImpl implements IStudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Students saveStudent(Students students) {
-        return studentRepository.save(students);
+    public DtoStudents saveStudent(DtoStudentsIU dtoStudentIU) {
+
+        DtoStudents response = new DtoStudents();
+        Students student = new Students();
+        BeanUtils.copyProperties(dtoStudentIU, student);
+
+        Students dbStudent = studentRepository.save(student);
+        BeanUtils.copyProperties(dbStudent, response);
+
+        return response;
     }
 
     @Override
