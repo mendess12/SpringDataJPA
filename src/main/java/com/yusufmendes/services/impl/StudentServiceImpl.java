@@ -35,7 +35,7 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public List<DtoStudents> getAllStudents() {
         List<DtoStudents> dtoList = new ArrayList<>();
-        List<Students> studentList = studentRepository.findAll();
+        List<Students> studentList = studentRepository.findAllStudent();
         for (Students student : studentList) {
             DtoStudents dtoStudents = new DtoStudents();
             BeanUtils.copyProperties(student, dtoStudents);
