@@ -1,14 +1,15 @@
 package com.yusufmendes.services.impl;
 
+import com.yusufmendes.dto.DtoCourse;
 import com.yusufmendes.dto.DtoStudents;
 import com.yusufmendes.dto.DtoStudentsIU;
+import com.yusufmendes.entities.Course;
 import com.yusufmendes.entities.Students;
 import com.yusufmendes.repository.StudentRepository;
 import com.yusufmendes.services.IStudentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,14 +47,24 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public DtoStudents getStudentById(Integer id) {
-        DtoStudents dto = new DtoStudents();
-        Optional<Students> optinal = studentRepository.findById(id);
-        if (optinal.isPresent()) {
-            Students dbStudent = optinal.get();
-            BeanUtils.copyProperties(dbStudent, dto);
-            return dto;
+
+        DtoStudents dtoStudents = new DtoStudents();
+        Optional<Students> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isEmpty()) {
+            return null;
         }
-        return null;
+        Students dbStudent = studentOptional.get();
+        BeanUtils.copyProperties(dbStudent, dtoStudents);
+
+        if (dbStudent.getCourses() != null && !dbStudent.getCourses().isEmpty()) {
+            for (Course course : dbStudent.getCourses()) {
+                DtoCourse dtoCourse = new DtoCourse();
+                BeanUtils.copyProperties(course, dtoCourse);
+
+                dtoStudents.getCourses().add(dtoCourse);
+            }
+        }
+        return dtoStudents;
     }
 
     @Override
